@@ -57,7 +57,7 @@ def display_variable_distribution(data):
 
 def main():
     # Display logo and user type in sidebar
-    image_path = r"C:\Users\ALLTEC\Desktop\stramlit\logo1.png"
+    image_path = "logo1.png"
     
     st.sidebar.markdown(
         f"""
@@ -72,9 +72,9 @@ def main():
     
     # Load data and handle file uploader in main body
     st.write("<h2>Télécharger votre fichier Excel ici:</h2>", unsafe_allow_html=True)
-    file = st.file_uploader("111111dataset_uniform_filled P.xlsx", type=["xlsx"])
+    file = st.file_uploader("Choisir fichier Excel", type=["xlsx"])
     if file:
-        data = pd.read_excel("111111dataset_uniform_filled P.xlsx")
+        data = pd.read_excel(file)
         st.success("Fichier chargé avec succès !")
 
         # Dashboard title and statistics
