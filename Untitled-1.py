@@ -72,9 +72,9 @@ def main():
     
     # Load data and handle file uploader in main body
     st.write("<h2>Télécharger votre fichier Excel ici:</h2>", unsafe_allow_html=True)
-    file = st.file_uploader("Choisir fichier Excel", type=["xlsx"])
+    file = st.file_uploader("111111dataset_uniform_filled P.xlsx", type=["xlsx"])
     if file:
-        data = pd.read_excel(file)
+        data = pd.read_excel("111111dataset_uniform_filled P.xlsx")
         st.success("Fichier chargé avec succès !")
 
         # Dashboard title and statistics
