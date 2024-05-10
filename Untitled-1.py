@@ -6,19 +6,19 @@ from PIL import Image
 import base64
 
 # Define image paths
-image_path1 = r"C:\Users\ALLTEC\Desktop\stramlit\images\Map-of-Beja-Tunisia-showing-location-of-farms-where-raw-bovine-milk-samples-were.png"
-image_path2 = r"C:\Users\ALLTEC\Desktop\stramlit\images\Capture d’écran (427).png"
-image_path3 = r"C:\Users\ALLTEC\Desktop\stramlit\images\sp\download.png"
-image_path4 = r"C:\Users\ALLTEC\Desktop\stramlit\images\sp\random 13.png"
-image_path5 = r"C:\Users\ALLTEC\Desktop\stramlit\images\sp\xgb1.png"
-image_path6 = r"C:\Users\ALLTEC\Desktop\stramlit\images\sp\light1.png"
-image_path7 = r"C:\Users\ALLTEC\Desktop\stramlit\images\sp\svm1.png"
+image_path1 = r"C:\Users\ALLTEC\Desktop\stramlit\Map-of-Beja-Tunisia-showing-location-of-farms-where-raw-bovine-milk-samples-were.png"
+image_path2 = r"C:\Users\ALLTEC\Desktop\stramlit\Capture d’écran (427).png"
+image_path3 = r"C:\Users\ALLTEC\Desktop\stramlit\downloadsp.png"
+image_path4 = r"C:\Users\ALLTEC\Desktop\stramlit\random 13sp.png"
+image_path5 = r"C:\Users\ALLTEC\Desktop\stramlit\xgb1sp.png"
+image_path6 = r"C:\Users\ALLTEC\Desktop\stramlit\light1sp.png"
+image_path7 = r"C:\Users\ALLTEC\Desktop\stramlit\svm1sp.png"
 
-image_path11 = r"C:\Users\ALLTEC\Desktop\stramlit\images\p\lin reg1.png"
-image_path12 = r"C:\Users\ALLTEC\Desktop\stramlit\images\p\random1.png"
-image_path13 = r"C:\Users\ALLTEC\Desktop\stramlit\images\p\xgb1.png"
-image_path14 = r"C:\Users\ALLTEC\Desktop\stramlit\images\p\light1.png"
-image_path15 = r"C:\Users\ALLTEC\Desktop\stramlit\images\p\svm1.png"
+image_path11 = r"C:\Users\ALLTEC\Desktop\stramlit\lin reg1.png"
+image_path12 = r"C:\Users\ALLTEC\Desktop\stramlit\random1.png"
+image_path13 = r"C:\Users\ALLTEC\Desktop\stramlit\xgb1.png"
+image_path14 = r"C:\Users\ALLTEC\Desktop\stramlit\light1.png"
+image_path15 = r"C:\Users\ALLTEC\Desktop\stramlit\\svm1.png"
 # Load images
 image1 = Image.open(image_path1)
 image2 = Image.open(image_path2)
@@ -60,7 +60,7 @@ def display_variable_distribution(data):
 
 def main():
     # Display logo and user type in sidebar
-    image_path = r"C:\Users\ALLTEC\Desktop\stramlit\images\logo1.png"
+    image_path = r"C:\Users\ALLTEC\Desktop\stramlit\logo1.png"
     image_base64 = get_image_base64(image_path)
     st.sidebar.markdown(
         f"""
@@ -101,10 +101,10 @@ def main():
                         selected_model = st.multiselect("Sélectionner le modèle", ["Linear Regression", "Random Forest", "SVM", "LightGBM", "XGBoost" ])
                         if st.button("Évaluation des approches with k-cross validation"):
                             st.title("Évaluation des approches with k-cross validation sans pollution")
-                            datawp = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_evaluation_resultswithout (1).xlsx")
+                            datawp = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_evaluation_resultswithout (1).xlsx")
                             st.bar_chart(datawp)
                             st.title("Évaluation des approches with k-cross validation pollution")
-                            datap = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_evaluation_resultspollution.xlsx")
+                            datap = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_evaluation_resultspollution.xlsx")
                             st.bar_chart(datap)
                         for model in selected_model:
                             if model == "Linear Regression":
@@ -113,10 +113,10 @@ def main():
                                 with c1:
                                     st.image(image11, caption='Modéle de "Linear regression sans pollution"', use_column_width=True)
                                 with c2:
-                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_ResultsLRP.xlsx" )
+                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_ResultsLRP.xlsx" )
                                     st.line_chart(datalin ,width=800)
                                 st.write("Evalution du modéle")
-                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsLRP (1).xlsx" )
+                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsLRP (1).xlsx" )
                                 st.bar_chart(dataev)
                             elif model == "Random Forest":
                                 st.title("Evaluation des données utilisant Random forest")
@@ -124,10 +124,10 @@ def main():
                                 with d1:
                                     st.image(image12, caption='Modéle de "Random forest sans pollution"', use_column_width=True)
                                 with d2:
-                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_ResultsrandomP.xlsx" )
+                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_ResultsrandomP.xlsx" )
                                     st.line_chart(datalin ,width=800)
                                 st.write("Evalution du modéle")
-                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsRFP (1).xlsx" )
+                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsRFP (1).xlsx" )
                                 st.bar_chart(dataev)
                             elif model == "SVM":
                                 st.title("Evaluation des données utilisant SVM")
@@ -135,10 +135,10 @@ def main():
                                 with d1:
                                     st.image(image15, caption='Modéle de "SVM sans pollution"', use_column_width=True)
                                 with d2:
-                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_ResultsSVMP.xlsx" )
+                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_ResultsSVMP.xlsx" )
                                     st.line_chart(datalin ,width=800)
                                 st.write("Evalution du modéle")
-                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsSVMP (1).xlsx" )
+                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsSVMP (1).xlsx" )
                                 st.bar_chart(dataev)
                             elif model == "LightGBM":
                                 st.title("Evaluation des données utilisant LightGBM")
@@ -146,10 +146,10 @@ def main():
                                 with d1:
                                     st.image(image14, caption='Modéle de "LightGBM sans pollution"', use_column_width=True)
                                 with d2:
-                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_ResultslgbmP.xlsx" )
+                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_ResultslgbmP.xlsx" )
                                     st.line_chart(datalin ,width=800)
                                 st.write("Evalution du modéle")
-                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsLRP (1).xlsx" )
+                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsLRP (1).xlsx" )
                                 st.bar_chart(dataev)
                             elif model == "XGBoost":
                                 st.title("Evaluation des données utilisant XGBoost")
@@ -157,10 +157,10 @@ def main():
                                 with d1:
                                     st.image(image13, caption='Modéle de "XGBoost sans pollution"', use_column_width=True)
                                 with d2:
-                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_ResultsxgbP.xlsx" )
+                                    datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_ResultsxgbP.xlsx" )
                                     st.line_chart(datalin ,width=800)
                                 st.write("Evalution du modéle")
-                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsxgb.xlsx" )
+                                dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsxgb.xlsx" )
                                 st.bar_chart(dataev)
         if file.name == "111111dataset_uniform_filled SP.xlsx":
 
@@ -168,10 +168,10 @@ def main():
             selected_model = st.multiselect("Sélectionner le modèle", ["Linear Regression", "Random Forest", "SVM", "LightGBM", "XGBoost"])
             if st.button("Évaluation des approches with k-cross validation"):
                             st.title("Évaluation des approches with k-cross validation sans pollution")
-                            datawp = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_evaluation_resultswithout (1).xlsx")
+                            datawp = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_evaluation_resultswithout (1).xlsx")
                             st.bar_chart(datawp)
                             st.title("Évaluation des approches with k-cross validation pollution")
-                            datap = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_evaluation_resultspollution.xlsx")
+                            datap = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_evaluation_resultspollution.xlsx")
                             st.bar_chart(datap)
             
             # Add code to train and evaluate selected models
@@ -182,10 +182,10 @@ def main():
                     with c1:
                         st.image(image3, caption='Modéle de "Linear regression sans pollution"', use_column_width=True)
                     with c2:
-                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\comparisonlinear (2).xlsx" )
+                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\comparisonlinear (2).xlsx" )
                         st.line_chart(datalin ,width=800)
                     st.write("Evalution du modéle")
-                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metrics SP.xlsx" )
+                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metrics SP.xlsx" )
                     st.bar_chart(dataev)
                 elif model == "Random Forest":
                     st.title("Evaluation des données utilisant Random forest")
@@ -193,10 +193,10 @@ def main():
                     with d1:
                         st.image(image4, caption='Modéle de "Random forest sans pollution"', use_column_width=True)
                     with d2:
-                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison random_Results.xlsx" )
+                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison random_Results.xlsx" )
                         st.line_chart(datalin ,width=800)
                     st.write("Evalution du modéle")
-                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsrandom.xlsx" )
+                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsrandom.xlsx" )
                     st.bar_chart(dataev)
                 elif model == "SVM":
                     st.title("Evaluation des données utilisant SVM")
@@ -204,10 +204,10 @@ def main():
                     with d1:
                         st.image(image7, caption='Modéle de "SVM sans pollution"', use_column_width=True)
                     with d2:
-                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_ResultsSVM.xlsx" )
+                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_ResultsSVM.xlsx" )
                         st.line_chart(datalin ,width=800)
                     st.write("Evalution du modéle")
-                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsSVM.xlsx" )
+                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsSVM.xlsx" )
                     st.bar_chart(dataev)
                 elif model == "LightGBM":
                     st.title("Evaluation des données utilisant LightGBM")
@@ -215,10 +215,10 @@ def main():
                     with d1:
                         st.image(image6, caption='Modéle de "LightGBM sans pollution"', use_column_width=True)
                     with d2:
-                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_Resultslgbm.xlsx" )
+                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_Resultslgbm.xlsx" )
                         st.line_chart(datalin ,width=800)
                     st.write("Evalution du modéle")
-                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsLightGBM.xlsx" )
+                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsLightGBM.xlsx" )
                     st.bar_chart(dataev)
                 elif model == "XGBoost":
                     st.title("Evaluation des données utilisant XGBoost")
@@ -226,10 +226,10 @@ def main():
                     with d1:
                         st.image(image5, caption='Modéle de "XGBoost sans pollution"', use_column_width=True)
                     with d2:
-                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\Comparison_Resultsxgb.xlsx" )
+                        datalin = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\Comparison_Resultsxgb.xlsx" )
                         st.line_chart(datalin ,width=800)
                     st.write("Evalution du modéle")
-                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\dataset\model_metricsxgb.xlsx" )
+                    dataev = pd.read_excel(r"C:\Users\ALLTEC\Desktop\stramlit\model_metricsxgb.xlsx" )
                     st.bar_chart(dataev)
 
             # Add code to display results
