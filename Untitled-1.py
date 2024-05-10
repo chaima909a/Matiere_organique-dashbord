@@ -6,8 +6,8 @@ from PIL import Image
 import base64
 
 # Define image paths
-image_path1 = r"C:\Users\ALLTEC\Desktop\stramlit\Map-of-Beja-Tunisia-showing-location-of-farms-where-raw-bovine-milk-samples-were.png"
-image_path2 = r"C:\Users\ALLTEC\Desktop\stramlit\Capture d’écran (427).png"
+image_path1 = "Map-of-Beja-Tunisia-showing-location-of-farms-where-raw-bovine-milk-samples-were.png"
+image_path2 = "Capture d’écran (427).png"
 image_path3 = r"C:\Users\ALLTEC\Desktop\stramlit\downloadsp.png"
 image_path4 = r"C:\Users\ALLTEC\Desktop\stramlit\random 13sp.png"
 image_path5 = r"C:\Users\ALLTEC\Desktop\stramlit\xgb1sp.png"
