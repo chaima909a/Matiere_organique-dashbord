@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
-import base64
+
 
 # Define image paths
 image_path1 = "Map-of-Beja-Tunisia-showing-location-of-farms-where-raw-bovine-milk-samples-were.png"
@@ -34,10 +34,7 @@ image13 = Image.open(image_path13)
 image14 = Image.open(image_path14)
 image15 = Image.open(image_path15)
 
-# Function to encode image to base64 for HTML embedding
-def get_image_base64(path):
-    with open(path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode()
+
 
 # Function to display images side by side in Streamlit
 def display_images():
@@ -61,11 +58,11 @@ def display_variable_distribution(data):
 def main():
     # Display logo and user type in sidebar
     image_path = r"C:\Users\ALLTEC\Desktop\stramlit\logo1.png"
-    image_base64 = get_image_base64(image_path)
+    
     st.sidebar.markdown(
         f"""
         <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-            <img src="data:image/png;base64,{image_base64}" style="width: 100px; height: 100px; border-radius: 50%;">
+            <img src="data:image/png;base64,{image_path}" style="width: 100px; height: 100px; border-radius: 50%;">
             <h3 style="text-align: center;">User</h3>
         </div>
         """,
