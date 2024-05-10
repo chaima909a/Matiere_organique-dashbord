@@ -8,17 +8,17 @@ import base64
 # Define image paths
 image_path1 = "Map-of-Beja-Tunisia-showing-location-of-farms-where-raw-bovine-milk-samples-were.png"
 image_path2 = "Capture d’écran (427).png"
-image_path3 = r"C:\Users\ALLTEC\Desktop\stramlit\downloadsp.png"
-image_path4 = r"C:\Users\ALLTEC\Desktop\stramlit\random 13sp.png"
-image_path5 = r"C:\Users\ALLTEC\Desktop\stramlit\xgb1sp.png"
-image_path6 = r"C:\Users\ALLTEC\Desktop\stramlit\light1sp.png"
-image_path7 = r"C:\Users\ALLTEC\Desktop\stramlit\svm1sp.png"
+image_path3 = "downloadsp.png"
+image_path4 = "random 13sp.png"
+image_path5 = "xgb1sp.png"
+image_path6 = "light1sp.png"
+image_path7 = "svm1sp.png"
 
-image_path11 = r"C:\Users\ALLTEC\Desktop\stramlit\lin reg1.png"
-image_path12 = r"C:\Users\ALLTEC\Desktop\stramlit\random1.png"
-image_path13 = r"C:\Users\ALLTEC\Desktop\stramlit\xgb1.png"
-image_path14 = r"C:\Users\ALLTEC\Desktop\stramlit\light1.png"
-image_path15 = r"C:\Users\ALLTEC\Desktop\stramlit\\svm1.png"
+image_path11 = "lin reg1.png"
+image_path12 = "random1.png"
+image_path13 = "xgb1.png"
+image_path14 = "light1.png"
+image_path15 = "svm1.png"
 # Load images
 image1 = Image.open(image_path1)
 image2 = Image.open(image_path2)
