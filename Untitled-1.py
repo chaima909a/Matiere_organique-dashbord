@@ -135,7 +135,7 @@ def main():
         main()
 
 
-    st.sidebar.markdown("All rights are reserved © 2024")
+    st.sidebar.markdown("Tous droits sont réservés © 2024")
     
     # Load data and handle file uploader in main body
     st.write("<h2>Télécharger votre fichier Excel ici:</h2>", unsafe_allow_html=True)
