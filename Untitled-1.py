@@ -176,7 +176,7 @@ def main():
                                 st.title("Evaluation des données utilisant Linear regression")
                                 c1,c2 = st.columns(2)
                                 with c1:
-                                    st.image(image11, caption='Modéle de "Linear regression sans pollution"', use_column_width=True)
+                                    st.image(image11, caption='Modéle de "Linear regression pollution"', use_column_width=True)
                                 with c2:
                                     datalin = pd.read_excel("Comparison_ResultsLRP.xlsx" )
                                     st.line_chart(datalin ,width=800)
@@ -187,7 +187,7 @@ def main():
                                 st.title("Evaluation des données utilisant Random forest")
                                 d1,d2 = st.columns(2)
                                 with d1:
-                                    st.image(image12, caption='Modéle de "Random forest sans pollution"', use_column_width=True)
+                                    st.image(image12, caption='Modéle de "Random forest pollution"', use_column_width=True)
                                 with d2:
                                     datalin = pd.read_excel("Comparison_ResultsrandomP.xlsx")
                                     st.line_chart(datalin ,width=800)
@@ -198,7 +198,7 @@ def main():
                                 st.title("Evaluation des données utilisant SVM")
                                 d1,d2 = st.columns(2)
                                 with d1:
-                                    st.image(image15, caption='Modéle de "SVM sans pollution"', use_column_width=True)
+                                    st.image(image15, caption='Modéle de "SVM pollution"', use_column_width=True)
                                 with d2:
                                     datalin = pd.read_excel("Comparison_ResultsSVMP.xlsx")
                                     st.line_chart(datalin ,width=800)
@@ -209,7 +209,7 @@ def main():
                                 st.title("Evaluation des données utilisant LightGBM")
                                 d1,d2 = st.columns(2)
                                 with d1:
-                                    st.image(image14, caption='Modéle de "LightGBM sans pollution"', use_column_width=True)
+                                    st.image(image14, caption='Modéle de "LightGBM pollution"', use_column_width=True)
                                 with d2:
                                     datalin = pd.read_excel("Comparison_ResultslgbmP.xlsx")
                                     st.line_chart(datalin ,width=800)
@@ -220,7 +220,7 @@ def main():
                                 st.title("Evaluation des données utilisant XGBoost")
                                 d1,d2 = st.columns(2)
                                 with d1:
-                                    st.image(image13, caption='Modéle de "XGBoost sans pollution"', use_column_width=True)
+                                    st.image(image13, caption='Modéle de "XGBoost pollution"', use_column_width=True)
                                 with d2:
                                     datalin = pd.read_excel("Comparison_ResultsxgbP.xlsx")
                                     st.line_chart(datalin ,width=800)
