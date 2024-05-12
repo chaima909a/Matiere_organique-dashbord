@@ -128,8 +128,6 @@ def main():
     page = pages[selection]
     page()
 
-if __name__ == "__main__":
-    main()
     if __name__ == "__main__":
         main()
     st.sidebar.markdown("All rights are reserved © 2024")
