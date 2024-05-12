@@ -123,8 +123,7 @@ def main():
 
     def main():
         st.sidebar.title("Navigation")
-        page = st.sidebar.radio(["Home", "About", "Contact"])
-
+        page = st.sidebar.radio("Allez à", ["Home", "About", "Contact"])
         if page == "Home":
             page_home()
         elif page == "About":
