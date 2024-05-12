@@ -58,13 +58,7 @@ def main():
     # Display logo and user type in sidebar
     image_path = "logo1.png"
     
-    st.sidebar.markdown(
-        f'<div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">'
-        f'<img src="data:image/png;base64,{image_path}" style="width: 100px; height: 100px; border-radius: 50%;">'
-        f'<h3 style="text-align: center;">User</h3>'
-        f'</div>',
-        unsafe_allow_html=True
-    )
+    st.sidebar.image(image_path, width=100, caption="User")
        
 
     def page_home():
