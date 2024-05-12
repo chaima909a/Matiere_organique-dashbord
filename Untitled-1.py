@@ -58,7 +58,7 @@ def main():
     # Display logo and user type in sidebar
     image_path = "logo1.png"
     
-    st.sidebar.image(image_path, width=100, caption="User")
+    st.sidebar.image(image_path, width=100, caption="Utilisateur")
        
 
     def page_home():
