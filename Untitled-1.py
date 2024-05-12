@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
-
+import plotly.express as px 
 
 # Define image paths
 image_path1 = "Map-of-Beja-Tunisia-showing-location-of-farms-where-raw-bovine-milk-samples-were.png"
@@ -68,6 +68,72 @@ def main():
         """,
         unsafe_allow_html=True
     )
+
+        def page_home():
+        st.header("Présentation de la zone etudiée Oued Béja, Béja")
+        st.subheader("Introduction à Oued Beja")
+        st.write("""Oued Beja, située dans le nord-ouest de la Tunisie, est une région d'une richesse historique et culturelle profonde. Nichée entre des paysages montagneux et des vallées fertiles, cette région offre un mélange unique de patrimoine naturel et humain.Connu par ses richesses agricoles, le gouvernorat de Béja se place parmi les premiers gouvernorats dans la production agricole du pays.""")
+        datagps = pd.read_excel("donnes gps.xlsx")
+        # Charger les données depuis le fichier Excel
+        @st.cache_data  # Mettre en cache les données pour éviter de les recharger à chaque rafraîchissement de la page
+        def load_data(file_path):
+            return pd.read_excel(file_path)
+
+        # Fonction pour afficher la carte
+        def display_map(data):
+            fig = px.scatter_mapbox(data, lat="Latitude", lon="Longitude", zoom=10)
+            fig.update_layout(mapbox_style="open-street-map")
+            return fig
+        st.subheader("Présentation de l'étude")
+        st.write("""Dans le cadre de cette étude, un échantillonnage approfondi a été réalisé dans la région d'Oued Beja, impliquant la collecte de 70 échantillons représentatifs. L'objectif principal de cette campagne d'échantillonnage était de comprendre et de prédire le contenu en matière organique dans cette zone spécifique.""")
+        # Chargement des données
+        file_path = "donnes gps.xlsx"
+        data = load_data(file_path)
+
+        # Affichage de la carte si les données sont disponibles
+        if not data.empty:
+            st.header("Carte des positions")
+            st.write("Affichage des positions à partir du fichier : ", file_path)
+            st.plotly_chart(display_map(data))
+        else:
+            st.error("Le fichier ne contient pas de données ou n'est pas accessible.")
+        
+
+    def page_about():
+        st.title("About Page")
+        st.write("This is the about page.")
+
+    def page_contact():
+        st.title("Vous pouvez nous contactez ")
+        # Collecte des entrées utilisateur
+        # Collecte des entrées utilisateur
+        # Collecte des entrées utilisateur
+        nom = st.text_input("Nom")
+        prenom = st.text_input("Prénom")
+        email = st.text_input("E-mail")
+        message = st.text_input("Message")
+
+        # Créer un bouton "Envoyez"
+        if st.button("Envoyez"):
+            # Vérifier si tous les champs sont remplis
+            if nom and prenom and email and message:
+                st.success("Message reçu, nous vous répondrons dans quelques jours. Merci 	:smiley: ")
+            else:
+                st.warning("Veuillez remplir tous les champs avant d'envoyer le message.")
+
+    def main():
+        st.sidebar.title("Navigation")
+        page = st.sidebar.radio("Go to", ["Home", "About", "Contact"])
+
+        if page == "Home":
+            page_home()
+        elif page == "About":
+            page_about()
+        elif page == "Contact":
+            page_contact()
+
+    if __name__ == "__main__":
+        main()
     st.sidebar.markdown("All rights are reserved © 2024")
     
     # Load data and handle file uploader in main body
