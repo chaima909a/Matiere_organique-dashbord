@@ -19,7 +19,14 @@ image_path12 = "random1.png"
 image_path13 = "xgb1.png"
 image_path14 = "light1.png"
 image_path15 = "svm1.png"
+
+image_path21 = "lin1 sea.png"
+image_path22 = "random sea1.png"
+image_path23 = "xgb1 sea.png"
+image_path24 = "svm1 sea.png"
+image_path25 = "light1 sea.png"
 # Load images
+
 image1 = Image.open(image_path1)
 image2 = Image.open(image_path2)
 image3 = Image.open(image_path3)
@@ -34,7 +41,11 @@ image13 = Image.open(image_path13)
 image14 = Image.open(image_path14)
 image15 = Image.open(image_path15)
 
-
+image21 = Image.open(image_path21)
+image22 = Image.open(image_path22)
+image23 = Image.open(image_path23)
+image24 = Image.open(image_path24)
+image25 = Image.open(image_path25)
 # Function to display images side by side in Streamlit
 def display_images():
     col1, col2 = st.columns(2)
