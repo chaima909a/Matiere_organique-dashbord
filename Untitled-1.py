@@ -162,6 +162,9 @@ def main():
                             st.title("Évaluation des approches with k-cross validation pollution")
                             datap = pd.read_excel("model_evaluation_resultspollution.xlsx")
                             st.bar_chart(datap)
+                            st.title("Évaluation des approches with k-cross validation sans enzymes et sans activités microbiennes")
+                            datasea = pd.read_excel("model_evaluation_results (2).xlsx")
+                            st.bar_chart(datasea)
                         for model in selected_model:
                             if model == "Linear Regression":
                                 st.title("Evaluation des données utilisant Linear regression")
@@ -229,6 +232,9 @@ def main():
                             st.title("Évaluation des approches with k-cross validation pollution")
                             datap = pd.read_excel("model_evaluation_resultspollution.xlsx")
                             st.bar_chart(datap)
+                            st.title("Évaluation des approches with k-cross validation sans enzymes et sans activités microbiennes")
+                            datasea = pd.read_excel("model_evaluation_results (2).xlsx")
+                            st.bar_chart(datasea)
             
             # Add code to train and evaluate selected models
             for model in selected_model:
@@ -287,7 +293,78 @@ def main():
                     st.write("Evalution du modéle")
                     dataev = pd.read_excel("model_metricsxgb.xlsx")
                     st.bar_chart(dataev)
+        if file.name == "111111dataset_uniform_filled sea.xlsx":
 
+            st.title("Sélectionner le modèle de machine learning")
+            selected_model = st.multiselect("Sélectionner le modèle", ["Linear Regression", "Random Forest", "SVM", "LightGBM", "XGBoost"])
+            if st.button("Évaluation des approches with k-cross validation"):
+                            st.title("Évaluation des approches with k-cross validation sans pollution")
+                            datawp = pd.read_excel("model_evaluation_resultswithout (1).xlsx")
+                            st.bar_chart(datawp)
+                            st.title("Évaluation des approches with k-cross validation pollution")
+                            datap = pd.read_excel("model_evaluation_resultspollution.xlsx")
+                            st.bar_chart(datap)
+                            st.title("Évaluation des approches with k-cross validation sans enzymes et sans activités microbiennes")
+                            datasea = pd.read_excel("model_evaluation_results (2).xlsx")
+                            st.bar_chart(datasea)
+            
+            # Add code to train and evaluate selected models
+            for model in selected_model:
+                if model == "Linear Regression":
+                    st.title("Evaluation des données utilisant Linear regression")
+                    c1,c2 = st.columns(2)
+                    with c1:
+                        st.image(image21, caption='Modéle de "Linear regression sans enzymes et sans activités microbiennes"', use_column_width=True)
+                    with c2:
+                        datalin = pd.read_excel("Comparison_ResultsLRPsea.xlsx")
+                        st.line_chart(datalin ,width=800)
+                    st.write("Evalution du modéle")
+                    dataev = pd.read_excel("model_metricsseaLR.xlsx")
+                    st.bar_chart(dataev)
+                elif model == "Random Forest":
+                    st.title("Evaluation des données utilisant Random forest")
+                    d1,d2 = st.columns(2)
+                    with d1:
+                        st.image(image22, caption='Modéle de "Random forest sans enzymes et sans activités microbiennes"', use_column_width=True)
+                    with d2:
+                        datalin = pd.read_excel("Comparison_Resultrandomsea.xlsx")
+                        st.line_chart(datalin ,width=800)
+                    st.write("Evalution du modéle")
+                    dataev = pd.read_excel("model_metricsseaRF.xlsx")
+                    st.bar_chart(dataev)
+                elif model == "SVM":
+                    st.title("Evaluation des données utilisant SVM")
+                    d1,d2 = st.columns(2)
+                    with d1:
+                        st.image(image24, caption='Modéle de "SVM sans enzymes et sans activités microbiennes"', use_column_width=True)
+                    with d2:
+                        datalin = pd.read_excel("Comparison_ResultsSVMsea.xlsx" )
+                        st.line_chart(datalin ,width=800)
+                    st.write("Evalution du modéle")
+                    dataev = pd.read_excel("model_metricsseasvm.xlsx" )
+                    st.bar_chart(dataev)
+                elif model == "LightGBM":
+                    st.title("Evaluation des données utilisant LightGBM")
+                    d1,d2 = st.columns(2)
+                    with d1:
+                        st.image(image25, caption='Modéle de "LightGBM sans sans enzymes et sans activités microbiennes"', use_column_width=True)
+                    with d2:
+                        datalin = pd.read_excel("Comparison_Resultslgbmsea.xlsx")
+                        st.line_chart(datalin ,width=800)
+                    st.write("Evalution du modéle")
+                    dataev = pd.read_excel("model_metricssealgbm.xlsx")
+                    st.bar_chart(dataev)
+                elif model == "XGBoost":
+                    st.title("Evaluation des données utilisant XGBoost")
+                    d1,d2 = st.columns(2)
+                    with d1:
+                        st.image(image23, caption='Modéle de "XGBoost sans enzymes et sans activités microbiennes"', use_column_width=True)
+                    with d2:
+                        datalin = pd.read_excel("Comparison_Resultsxgbsea.xlsx")
+                        st.line_chart(datalin ,width=800)
+                    st.write("Evalution du modéle")
+                    dataev = pd.read_excel("model_metricsseaxgb.xlsx")
+                    st.bar_chart(dataev)
             # Add code to display results
             # ...
 
