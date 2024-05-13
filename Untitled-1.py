@@ -263,7 +263,7 @@ def main():
                         datalin = pd.read_excel("Comparison_ResultsSVM.xlsx" )
                         st.line_chart(datalin ,width=800)
                     st.write("Evalution du modéle")
-                    dataev = pd.read_excel("stramlit\model_metricsSVM.xlsx" )
+                    dataev = pd.read_excel("model_metricsSVM.xlsx" )
                     st.bar_chart(dataev)
                 elif model == "LightGBM":
                     st.title("Evaluation des données utilisant LightGBM")
