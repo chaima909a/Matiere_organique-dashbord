@@ -103,8 +103,67 @@ def main():
         
 
     def page_about():
-        st.title("About Page")
-        st.write("This is the about page.")
+        
+        import joblib
+        import numpy as np
+        # Charger le modèle
+        model = joblib.load('model_xgboost.pkl')
+
+        st.title("Prédiction du Carbone Organique du Sol (SOC)")
+
+        # Définir les plages de valeurs pour chaque variable selon les valeurs fournies
+        Ph_min, Ph_max = 8.14, 9.18
+        Conductivite_min, Conductivite_max = 0.01, 2.702
+        Matiere_organique_min, Matiere_organique_max = 1.97, 2.12
+        Calcaire_total_min, Calcaire_total_max = 0.012, 0.046
+        Calcaire_actif_min, Calcaire_actif_max = 0.103, 0.1425
+        Azote_totale_min, Azote_totale_max = 0.0121, 0.05
+        Phosphore_assimilable_min, Phosphore_assimilable_max = 3.85, 5.7027
+        Potassium_assimilable_min, Potassium_assimilable_max = 31.91, 36.32
+        Pb_min, Pb_max = 10.49, 78.3265
+        Zn_min, Zn_max = 26.13, 233.07
+        Cd_min, Cd_max = 0.05, 1.7
+        Cu_min, Cu_max = 1.96, 144.59
+        Ni_min, Ni_max = 8.1, 464.67
+        B_glucosidase_min, B_glucosidase_max = 33.37, 385.40
+        Phosphatase_basique_min, Phosphatase_basique_max = 47.47, 520.23
+        Na_min, Na_max = 22.45, 546.00
+        K_min, K_max = 4084.57, 9314.52
+        Mn_min, Mn_max = 1.11, 3.52
+        FDA_min, FDA_max = 1.24, 3.25
+        SIR_min, SIR_max = 1.75, 5.30
+        CEC_min, CEC_max = 10.24, 14.42
+
+        # Collecter les entrées de l'utilisateur
+        Ph = st.slider('Ph', min_value=Ph_min, max_value=Ph_max, value=8.41)
+        Conductivite_electrique = st.slider('Conductivité electrique', min_value=Conductivite_min, max_value=Conductivite_max, value=1.0)
+        Matiere_organique = st.slider('Teneur en matière organique (M%)', min_value=Matiere_organique_min, max_value=Matiere_organique_max, value=2.0)
+        Calcaire_total = st.slider('Calcaire total', min_value=Calcaire_total_min, max_value=Calcaire_total_max, value=0.5)
+        Calcaire_actif = st.slider('Calcaire actif', min_value=Calcaire_actif_min, max_value=Calcaire_actif_max, value=0.1)
+        Azote_totale = st.slider('Teneur en azote totale', min_value=Azote_totale_min, max_value=Azote_totale_max, value=0.2)
+        Phosphore_assimilable = st.slider('Teneur en phosphore assimilable (mg/kg sol)', min_value=Phosphore_assimilable_min, max_value=Phosphore_assimilable_max, value=50.0)
+        Potassium_assimilable = st.slider('Teneur en Potassium assimilable (g/kg soil)', min_value=Potassium_assimilable_min, max_value=Potassium_assimilable_max, value=1.5)
+        Pb = st.slider('Pb', min_value=Pb_min, max_value=Pb_max, value=10.0)
+        Zn = st.slider('Zn', min_value=Zn_min, max_value=Zn_max, value=30.0)
+        Cd = st.slider('Cd', min_value=Cd_min, max_value=Cd_max, value=0.1)
+        Cu = st.slider('Cu', min_value=Cu_min, max_value=Cu_max, value=20.0)
+        Ni = st.slider('Ni', min_value=Ni_min, max_value=Ni_max, value=15.0)
+        B_glucosidase = st.slider('B-glucosidase', min_value=B_glucosidase_min, max_value=B_glucosidase_max, value=100.0)
+        Phosphatase_basique = st.slider('Phosphatase basique', min_value=Phosphatase_basique_min, max_value=Phosphatase_basique_max, value=50.0)
+        Na = st.slider('Na', min_value=Na_min, max_value=Na_max, value=1.0)
+        K = st.slider('K', min_value=K_min, max_value=K_max, value=2.0)
+        Mn = st.slider('Mn', min_value=Mn_min, max_value=Mn_max, value=1.0)
+        FDA = st.slider('FDA', min_value=FDA_min, max_value=FDA_max, value=1.0)
+        SIR = st.slider('SIR', min_value=SIR_min, max_value=SIR_max, value=1.0)
+        CEC = st.slider('CEC', min_value=CEC_min, max_value=CEC_max, value=10.0)
+
+        # Convertir les entrées en un array numpy
+        inputs = np.array([[Ph, Conductivite_electrique, Matiere_organique, Calcaire_total, Calcaire_actif, Azote_totale, Phosphore_assimilable, Potassium_assimilable, Pb, Zn, Cd, Cu, Ni, B_glucosidase, Phosphatase_basique, Na, K, Mn, FDA, SIR, CEC]])
+
+        if st.button("Prédire"):
+            prediction = model.predict(inputs)
+            st.success(f'La prédiction du Carbone Organique du Sol (SOC) est : {prediction[0]:.2f} g/kg soil')
+
 
     def page_contact():
         st.title("Vous pouvez nous contactez ")
