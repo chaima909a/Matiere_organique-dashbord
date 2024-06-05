@@ -208,11 +208,11 @@ def main():
 
         # Dashboard title and statistics
         st.write("# Dashboard du carbone organique SOC")
-        a1, a2, a3, a4 = st.columns(4)
+        a1, a2, a4, a3 = st.columns(4)
         a1.metric("Max. SOC", data['Organic Carbon(g/kg soil)'].max())
         a2.metric("Min. SOC", data['Organic Carbon(g/kg soil)'].min())
-        a3.metric("Mean. SOC", data['Organic Carbon(g/kg soil)'].mean())
-        a4.metric("Count. SOC", data['Organic Carbon(g/kg soil)'].count())
+        a4.metric("Mean. SOC", data['Organic Carbon(g/kg soil)'].mean())
+        a3.metric("Count. SOC", data['Organic Carbon(g/kg soil)'].count())
         # Display images
         display_images()
 
