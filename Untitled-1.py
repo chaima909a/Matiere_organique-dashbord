@@ -211,8 +211,7 @@ def main():
         a1, a2, a3 = st.columns(3)
         a1.metric("Max. SOC", data['Organic Carbon(g/kg soil)'].max())
         a2.metric("Min. SOC", data['Organic Carbon(g/kg soil)'].min())
-        a3.metric("Count. SOC", data['Organic Carbon(g/kg soil)'].count())
-        a4.metric("Mean. SOC", data['Organic Carbon(g/kg soil)'].mean())
+        a3.metric("Mean. SOC", data['Organic Carbon(g/kg soil)'].mean())
 
         # Display images
         display_images()
