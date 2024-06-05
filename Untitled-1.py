@@ -104,65 +104,93 @@ def main():
 
     def page_about():
         
+        # Exemples d'entraînement et de sauvegarde
         import joblib
-        import numpy as np
-        # Charger le modèle
-        model = joblib.load('model_xgboost.pkl')
+        from sklearn.model_selection import train_test_split
+        from sklearn.linear_model import LinearRegression
+        from sklearn.svm import SVR
+        import xgboost as xgb
+        import lightgbm as lgb
+        from sklearn.ensemble import RandomForestRegressor
+        import pandas as pd
 
+        # Chargez vos données
+        df = pd.read_excel('111111dataset_uniform_filled P.xlsx')
+        X = df[['Ph', 'Conductivité electrique', 'Teneur en matière organque (M%)', 'Calcaire total', 'Calcaire actif ', 'Teneur en azote totale', 'Teneur en phosphore assimilable (mg/kg sol)', 'Teneur en Potassium assimilable (g/kg soil) ' , 'Pb', 'Zn', 'Cd', 'Cu', 'Ni', 'B-glucosidase', 'Phosphatase basique', 'Na', 'K', 'Mn', 'FDA', 'SIR', 'CEC']]
+        y = df['Organic Carbon(g/kg soil)']
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+        # Entraînez et sauvegardez chaque modèle
+        models = {
+            'xgboost': xgb.XGBRegressor(),
+            'svm': SVR(),
+            'lightgbm': lgb.LGBMRegressor(),
+            'random_forest': RandomForestRegressor(),
+            'linear_regression': LinearRegression()
+        }
+
+        for name, model in models.items():
+            model.fit(X_train, y_train)
+            joblib.dump(model, f'model_{name}.pkl')
+        
+        import streamlit as st
+        import numpy as np
+        import pandas as pd
+        import joblib
+
+        # Charger les modèles sauvegardés
+        models = {
+            'XGBoost': joblib.load('model_xgboost.pkl'),
+            'SVM': joblib.load('model_svm.pkl'),
+            'LightGBM': joblib.load('model_lightgbm.pkl'),
+            'Random Forest': joblib.load('model_random_forest.pkl'),
+            'Linear Regression': joblib.load('model_linear_regression.pkl')
+        }
+
+        # Fonction pour faire des prédictions avec tous les modèles
+        def predict_all(features):
+            predictions = {}
+            for model_name, model in models.items():
+                predictions[model_name] = model.predict([features])[0]
+            return predictions
+
+        # Page de prédiction
         st.title("Prédiction du Carbone Organique du Sol (SOC)")
 
-        # Définir les plages de valeurs pour chaque variable selon les valeurs fournies
-        Ph_min, Ph_max = 8.14, 9.18
-        Conductivite_min, Conductivite_max = 0.01, 2.702
-        Matiere_organique_min, Matiere_organique_max = 1.97, 2.12
-        Calcaire_total_min, Calcaire_total_max = 0.012, 0.046
-        Calcaire_actif_min, Calcaire_actif_max = 0.103, 0.1425
-        Azote_totale_min, Azote_totale_max = 0.0121, 0.05
-        Phosphore_assimilable_min, Phosphore_assimilable_max = 3.85, 5.7027
-        Potassium_assimilable_min, Potassium_assimilable_max = 31.91, 36.32
-        Pb_min, Pb_max = 10.49, 78.3265
-        Zn_min, Zn_max = 26.13, 233.07
-        Cd_min, Cd_max = 0.05, 1.7
-        Cu_min, Cu_max = 1.96, 144.59
-        Ni_min, Ni_max = 8.1, 464.67
-        B_glucosidase_min, B_glucosidase_max = 33.37, 385.40
-        Phosphatase_basique_min, Phosphatase_basique_max = 47.47, 520.23
-        Na_min, Na_max = 22.45, 546.00
-        K_min, K_max = 4084.57, 9314.52
-        Mn_min, Mn_max = 1.11, 3.52
-        FDA_min, FDA_max = 1.24, 3.25
-        SIR_min, SIR_max = 1.75, 5.30
-        CEC_min, CEC_max = 10.24, 14.42
-
         # Collecter les entrées de l'utilisateur
-        Ph = st.slider('Ph', min_value=Ph_min, max_value=Ph_max, value=8.41)
-        Conductivite_electrique = st.slider('Conductivité electrique', min_value=Conductivite_min, max_value=Conductivite_max, value=1.0)
-        Matiere_organique = st.slider('Teneur en matière organique (M%)', min_value=Matiere_organique_min, max_value=Matiere_organique_max, value=2.0)
-        Calcaire_total = st.slider('Calcaire total', min_value=Calcaire_total_min, max_value=Calcaire_total_max, value=0.5)
-        Calcaire_actif = st.slider('Calcaire actif', min_value=Calcaire_actif_min, max_value=Calcaire_actif_max, value=0.1)
-        Azote_totale = st.slider('Teneur en azote totale', min_value=Azote_totale_min, max_value=Azote_totale_max, value=0.2)
-        Phosphore_assimilable = st.slider('Teneur en phosphore assimilable (mg/kg sol)', min_value=Phosphore_assimilable_min, max_value=Phosphore_assimilable_max, value=50.0)
-        Potassium_assimilable = st.slider('Teneur en Potassium assimilable (g/kg soil)', min_value=Potassium_assimilable_min, max_value=Potassium_assimilable_max, value=1.5)
-        Pb = st.slider('Pb', min_value=Pb_min, max_value=Pb_max, value=10.0)
-        Zn = st.slider('Zn', min_value=Zn_min, max_value=Zn_max, value=30.0)
-        Cd = st.slider('Cd', min_value=Cd_min, max_value=Cd_max, value=0.1)
-        Cu = st.slider('Cu', min_value=Cu_min, max_value=Cu_max, value=20.0)
-        Ni = st.slider('Ni', min_value=Ni_min, max_value=Ni_max, value=15.0)
-        B_glucosidase = st.slider('B-glucosidase', min_value=B_glucosidase_min, max_value=B_glucosidase_max, value=100.0)
-        Phosphatase_basique = st.slider('Phosphatase basique', min_value=Phosphatase_basique_min, max_value=Phosphatase_basique_max, value=50.0)
-        Na = st.slider('Na', min_value=Na_min, max_value=Na_max, value=1.0)
-        K = st.slider('K', min_value=K_min, max_value=K_max, value=2.0)
-        Mn = st.slider('Mn', min_value=Mn_min, max_value=Mn_max, value=1.0)
-        FDA = st.slider('FDA', min_value=FDA_min, max_value=FDA_max, value=1.0)
-        SIR = st.slider('SIR', min_value=SIR_min, max_value=SIR_max, value=1.0)
-        CEC = st.slider('CEC', min_value=CEC_min, max_value=CEC_max, value=10.0)
+        Ph = st.slider('Ph', min_value=8.14, max_value=9.18, value=8.41)
+        Conductivite_electrique = st.slider('Conductivité electrique', min_value=0.01, max_value=2.702, value=1.0)
+        Matiere_organique = st.slider('Teneur en matière organique (M%)', min_value=1.97, max_value=2.12, value=2.0)
+        Calcaire_total = st.slider('Calcaire total', min_value=0.012, max_value=0.046, value=0.5)
+        Calcaire_actif = st.slider('Calcaire actif', min_value=0.103, max_value=0.1425, value=0.1)
+        Azote_totale = st.slider('Teneur en azote totale', min_value=0.0121, max_value=0.05, value=0.2)
+        Phosphore_assimilable = st.slider('Teneur en phosphore assimilable (mg/kg sol)', min_value=3.85, max_value=5.7027, value=50.0)
+        Potassium_assimilable = st.slider('Teneur en Potassium assimilable (g/kg soil)', min_value=31.91, max_value=36.32, value=1.5)
+        Pb = st.slider('Pb', min_value=10.49, max_value=78.3265, value=10.0)
+        Zn = st.slider('Zn', min_value=26.13, max_value=233.07, value=30.0)
+        Cd = st.slider('Cd', min_value=0.05, max_value=1.7, value=0.1)
+        Cu = st.slider('Cu', min_value=1.96, max_value=144.59, value=20.0)
+        Ni = st.slider('Ni', min_value=8.1, max_value=464.67, value=15.0)
+        B_glucosidase = st.slider('B-glucosidase', min_value=33.37, max_value=385.40, value=100.0)
+        Phosphatase_basique = st.slider('Phosphatase basique', min_value=47.47, max_value=520.23, value=50.0)
+        Na = st.slider('Na', min_value=22.45, max_value=546.00, value=1.0)
+        K = st.slider('K', min_value=4084.57, max_value=9314.52, value=2.0)
+        Mn = st.slider('Mn', min_value=1.11, max_value=3.52, value=1.0)
+        FDA = st.slider('FDA', min_value=1.24, max_value=3.25, value=1.0)
+        SIR = st.slider('SIR', min_value=1.75, max_value=5.30, value=1.0)
+        CEC = st.slider('CEC', min_value=10.24, max_value=14.42, value=10.0)
 
         # Convertir les entrées en un array numpy
-        inputs = np.array([[Ph, Conductivite_electrique, Matiere_organique, Calcaire_total, Calcaire_actif, Azote_totale, Phosphore_assimilable, Potassium_assimilable, Pb, Zn, Cd, Cu, Ni, B_glucosidase, Phosphatase_basique, Na, K, Mn, FDA, SIR, CEC]])
+        inputs = np.array([Ph, Conductivite_electrique, Matiere_organique, Calcaire_total, Calcaire_actif, Azote_totale, Phosphore_assimilable, Potassium_assimilable, Pb, Zn, Cd, Cu, Ni, B_glucosidase, Phosphatase_basique, Na, K, Mn, FDA, SIR, CEC])
 
+        # Bouton pour prédire
         if st.button("Prédire"):
-            prediction = model.predict(inputs)
-            st.success(f'La prédiction du Carbone Organique du Sol (SOC) est : {prediction[0]:.2f} g/kg soil')
+            predictions = predict_all(inputs)
+            prediction_df = pd.DataFrame(list(predictions.items()), columns=['Modèle', 'Prédiction'])
+            st.write(prediction_df)
+
+
 
 
     def page_contact():
