@@ -88,7 +88,7 @@ def main():
             fig.update_layout(mapbox_style="open-street-map")
             return fig
         st.subheader("Présentation de l'étude")
-        st.write("""Dans le cadre de cette étude, un échantillonnage approfondi a été réalisé dans la région d'Oued Beja, impliquant la collecte de 70 échantillons représentatifs. L'objectif principal de cette campagne d'échantillonnage était de comprendre et de prédire le contenu en matière organique dans cette zone spécifique.""")
+        st.write("""Dans le cadre de cette étude, un échantillonnage approfondi a été réalisé dans la région d'Oued Beja, impliquant la collecte de 70 échantillons représentatifs. L'objectif principal de cette campagne d'échantillonnage était de comprendre et de prédire le carbone organique dans cette zone spécifique.""")
         # Chargement des données
         file_path = "donnes gps.xlsx"
         data = load_data(file_path)
@@ -207,7 +207,7 @@ def main():
         st.success("Fichier chargé avec succès !")
 
         # Dashboard title and statistics
-        st.write("# Dashboard de la matière organique SOC")
+        st.write("# Dashboard du carbone organique SOC")
         a1, a2, a3 = st.columns(3)
         a1.metric("Max. SOC", data['Organic Carbon(g/kg soil)'].max())
         a2.metric("Min. SOC", data['Organic Carbon(g/kg soil)'].min())
