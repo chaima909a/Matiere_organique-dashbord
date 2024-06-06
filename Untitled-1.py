@@ -102,7 +102,7 @@ def main():
             st.error("Le fichier ne contient pas de données ou n'est pas accessible.")
         
 
-    def page_about():
+    def page_Prédiction_SOC():
         # Exemples d'entraînement et de sauvegarde
         import joblib
         from sklearn.model_selection import train_test_split
@@ -112,6 +112,7 @@ def main():
         import lightgbm as lgb
         from sklearn.ensemble import RandomForestRegressor
         import pandas as pd
+        import plotly.graph_objects as go
 
         # Chargez vos données
         df = pd.read_excel('111111dataset_uniform_filled P.xlsx')
@@ -122,7 +123,7 @@ def main():
 
         # Entraînez et sauvegardez chaque modèle
         models = {
-            
+            'xgboost': xgb.XGBRegressor(),
             'svm': SVR(),
             'lightgbm': lgb.LGBMRegressor(),
             'random_forest': RandomForestRegressor(),
@@ -153,7 +154,23 @@ def main():
             for model_name, model in models.items():
                 predictions[model_name] = model.predict([features])[0]
             return predictions
-
+        # Fonction pour créer une jauge
+        def create_gauge(value, title, min_value=0, max_value=100):
+            fig = go.Figure(go.Indicator(
+                mode="gauge+number",
+                value=value,
+                title={'text': title},
+                gauge={
+                    'axis': {'range': [min_value, max_value]},
+                    'bar': {'color': "darkblue"},
+                    'steps': [
+                        {'range': [min_value, max_value*0.33], 'color': "lightgreen"},
+                        {'range': [max_value*0.33, max_value*0.66], 'color': "yellow"},
+                        {'range': [max_value*0.66, max_value], 'color': "red"}
+                    ],
+                }
+            ))
+            return fig
         # Page de prédiction
         st.title("Prédiction du Carbone Organique du Sol (SOC)")
 
@@ -189,9 +206,13 @@ def main():
             prediction_df = pd.DataFrame(list(predictions.items()), columns=['Modèle', 'Prédiction'])
             st.write(prediction_df)
 
-
-
-
+            # Afficher les jauges pour chaque modèle
+            st.subheader("Jauges de Prédiction de SOC")
+            cols = st.columns(len(predictions))
+            for i, (model_name, prediction) in enumerate(predictions.items()):
+                with cols[i]:
+                    gauge = create_gauge(prediction, model_name, min_value=0, max_value=100)  # Ajustez min_value et max_value selon les besoins
+                    st.plotly_chart(gauge, use_container_width=True)
 
     def page_contact():
         st.title("Vous pouvez nous contactez ")
@@ -213,11 +234,12 @@ def main():
 
     def main():
         st.sidebar.title("Navigation")
-        page = st.sidebar.radio("Allez à", ["Home", "About", "Contact"])
+        page = st.sidebar.radio("Go to", ["Home", "Prédiction SOC", "Contact"])
+
         if page == "Home":
             page_home()
-        elif page == "About":
-            page_about()
+        elif page == "Prédiction SOC":
+            page_Prédiction_SOC()
         elif page == "Contact":
             page_contact()
 
