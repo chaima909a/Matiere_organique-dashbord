@@ -123,7 +123,7 @@ def main():
 
         # Entraînez et sauvegardez chaque modèle
         models = {
-            'xgboost': xgb.XGBRegressor(),
+            
             'svm': SVR(),
             'lightgbm': lgb.LGBMRegressor(),
             'random_forest': RandomForestRegressor(),
