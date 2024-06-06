@@ -11,3 +11,4 @@ joblib==1.4.2
 xgboost==2.0.3
 lightgbm==4.3.0
 scikit-learn==1.4.2
+plotly==5.22.0
