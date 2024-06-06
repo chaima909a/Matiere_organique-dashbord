@@ -103,7 +103,6 @@ def main():
         
 
     def page_about():
-        
         # Exemples d'entraînement et de sauvegarde
         import joblib
         from sklearn.model_selection import train_test_split
@@ -189,6 +188,7 @@ def main():
             predictions = predict_all(inputs)
             prediction_df = pd.DataFrame(list(predictions.items()), columns=['Modèle', 'Prédiction'])
             st.write(prediction_df)
+
 
 
 
